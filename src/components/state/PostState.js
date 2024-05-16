@@ -10,7 +10,7 @@ export default function PostState(props) {
 
     const navigate = useNavigate();
 
-    const url="https://backend-oup3.onrender.com";//"http://localhost:5000";
+    const url="http://localhost:5000";//"https://backend-oup3.onrender.com";//
     const getPosts = async () => {
       try {
         const response = await fetch(`${url}/fetchposts`, {

@@ -9,7 +9,7 @@ export default function Login() {
 	const [Error, setError] = useState(false);
 	const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://backend-oup3.onrender.com/login`,{method : 'POST',headers : {'Content-Type' : 'application/json'},body : JSON.stringify({email : Credentials.email,password : Credentials.password})});
+        const response = await fetch(`http://localhost:5000/login`,{method : 'POST',headers : {'Content-Type' : 'application/json'},body : JSON.stringify({email : Credentials.email,password : Credentials.password})});
         const json=await response.json();
         console.log(json);
 
