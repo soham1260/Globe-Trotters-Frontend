@@ -44,7 +44,7 @@ export default function Update() {
     } else {
       navigate("/signup");
     }
-  });
+  },[]);
 
   const handleClick = async (e) => {
     e.preventDefault();
