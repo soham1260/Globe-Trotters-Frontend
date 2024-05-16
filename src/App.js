@@ -6,11 +6,7 @@ import Signup from './components/Signup';
 import About from './components/About';
 import Post from './components/Post';
 import Myposts from './components/Myposts';
-import {
-  BrowserRouter,
-  Route,
-  Routes
-} from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Compose from './components/Compose';
@@ -20,7 +16,7 @@ import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <PostState>
         <Routes>
           <Route path='/' element={<Home/>}/>
@@ -34,7 +30,7 @@ function App() {
           <Route path="*" element={<><Navbar/><NotFound/><Footer/></>} />
         </Routes>
       </PostState>
-    </BrowserRouter>
+    </Router>
   );
 }
 
