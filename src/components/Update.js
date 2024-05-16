@@ -11,12 +11,12 @@ export default function Update() {
   const context = useContext(postContext);
   const { posts, getPosts, editPost } = context;
   const { id } = useParams();
-  const [Post, setPost] = useState({ title: "", content: "" });
+  const [Post, setPost] = useState({ title: '', content: '' });
   const [Error, setError] = useState({ title: false, content: false });
   const [removeFiles, setremoveFiles] = useState([]);
   const [oldFiles, setoldFiles] = useState([]);
   const [newFiles, setnewFiles] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const [Video,setVideo] = useState();
   const [Videourl,setVideourl] = useState("");
   const [Videochange,setVideochange] = useState(false);
@@ -40,6 +40,7 @@ export default function Update() {
               setVideo({preview: post.video.url})
             }
           }
+          setLoading(false);
         });
     } else {
       navigate("/signup");
