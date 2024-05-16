@@ -48,7 +48,7 @@ export default function Myposts() {
                   <h1>{post.title}</h1>
                   <p style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
                     {stripHtmlTags(post.content).substring(0, 150)}
-                    {post.content.length > 150 && <Link to={{ pathname: `/posts/${post._id}`, state: { post } }}>...Read More</Link>}
+                    {(post.content.length > 150 || post.images || post.video) && <Link to={{ pathname: `/posts/${post._id}`, state: { post } }}>...Read More</Link>}
                   </p>
                   <div style={{fontFamily: "Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode, Geneva, Verdana, sans-serif"}}><i><small>{new Date(post.date).toLocaleString()}</small></i></div>
                 </div>
