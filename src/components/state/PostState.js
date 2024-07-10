@@ -50,7 +50,7 @@ export default function PostState(props) {
         }
     
         const json = await response.json();
-        if(json.length == 0) setSearch(true);
+        if(json.length === 0) setSearch(true);
         setposts(json);
       } catch (error) {
         console.error(error);
@@ -97,7 +97,7 @@ export default function PostState(props) {
     }
 
     const deletePost = async (id) => {
-      const response = await fetch(`${url}/deletepost/${id}`,{method : 'DELETE',headers : {'Content-Type' : 'application/json','auth-token' : localStorage.getItem('token')}});
+      await fetch(`${url}/deletepost/${id}`,{method : 'DELETE',headers : {'Content-Type' : 'application/json','auth-token' : localStorage.getItem('token')}});
       const newpost = posts.filter((post) => {return post._id !== id});
       setposts(newpost);
     }

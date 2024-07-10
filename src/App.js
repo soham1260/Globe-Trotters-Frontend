@@ -28,6 +28,7 @@ function App() {
           <Route path="/updatepost/:id" element={<><Navbar/><Update/><Footer/></>} />
           <Route path="/my-posts" element={<><Navbar/><Myposts/><Footer/></>} />
           <Route path="/compose" element={<><Navbar/><Compose/><Footer/></>} />
+          <Route path="/notfound" element={<><Navbar/><NotFound/><Footer/></>} />
           <Route path="*" element={<><Navbar/><NotFound/><Footer/></>} />
         </Routes>
       </PostState>
