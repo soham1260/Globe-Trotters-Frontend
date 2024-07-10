@@ -24,7 +24,9 @@ export default function Data() {
   function stripHtmlTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
-    return str.replace(/<[^>]*>/g, " ");
+    str = str.replace(/<[^>]*>/g, " ");
+    str = str.replace(/[\n\r\t]/g, " ");
+    return str;
   }
   return (
     <div
@@ -69,7 +71,7 @@ export default function Data() {
                 }}
               >
                 <i>
-                  ~ {post.name} <br />{" "}
+                  ~ {post.name} <br/>
                   <small>{new Date(post.date).toLocaleString()}</small>
                 </i>
               </div>

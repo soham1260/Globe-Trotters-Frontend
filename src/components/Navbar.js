@@ -16,7 +16,7 @@ export default function Navbar() {
         <Link className="navbar-brand" to="/">Globe Trotters</Link>
       </div>
         <ul className="nav navbar-nav navbar-right">
-          <li id="home"><Link to="/">HOME</Link></li>
+          <li id="search"><Link to="/search">SEARCH</Link></li>
           <li id="about"><Link to="/my-posts">MY-POSTS</Link></li>
           <li id="compose"><Link to="/compose">COMPOSE</Link></li>
           <li id="compose"><Link to="/about">ABOUT</Link></li>

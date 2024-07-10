@@ -32,7 +32,7 @@ export default function Post() {
     return (
     <div className='container' style={{paddingTop : "5%",paddingBottom: "5%"}}>
       { !Post ? 
-        <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <div style={{ display: 'flex', justifyContent: 'center',alignItems:"center",height:"100vh"}}>
           <img src={spinner} alt="loading..." width="100px" />
         </div> : 
         <><h1>{Post.title}</h1>
