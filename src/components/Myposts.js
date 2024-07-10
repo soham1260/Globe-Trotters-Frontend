@@ -36,7 +36,7 @@ export default function Myposts() {
       return (
         <div className="container" style={{paddingTop : "5%",paddingBottom: "5%"}}>
           {loading ? 
-            <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center',alignItems:"center",height:"70vh"}}>
               <img src={spinner} alt="loading..." width="100px" />
             </div> :
             <>

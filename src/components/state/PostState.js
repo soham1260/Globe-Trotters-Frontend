@@ -6,11 +6,16 @@ export const postContext = createContext();
 export default function PostState(props) {
     const postsInitial = []
 
-    const [posts, setposts] = useState(postsInitial)
+    const [posts, setposts] = useState(postsInitial);
+    const [Search, setSearch] = useState(false);
 
     const navigate = useNavigate();
 
+<<<<<<< HEAD
     const url="http://localhost:5000";//"https://backend-oup3.onrender.com";//
+=======
+    const url="https://backend-oup3.onrender.com";
+>>>>>>> a07f06ed2e83b6d50555ca8fec3b1ccac03bfd57
     const getPosts = async () => {
       try {
         const response = await fetch(`${url}/fetchposts`, {
@@ -33,6 +38,29 @@ export default function PostState(props) {
       }
     };
     
+    const search = async (query) => {
+      setSearch(false);
+      try {
+        const response = await fetch(`${url}/search/${query}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': localStorage.getItem('token')
+          }
+        });
+    
+        if (!response.ok) {
+          throw new Error('Token is invalid or request failed');
+        }
+    
+        const json = await response.json();
+        if(json.length == 0) setSearch(true);
+        setposts(json);
+      } catch (error) {
+        console.error(error);
+        navigate("/signup");
+      }
+    };
 
     const getAllPosts = async () => {
       try {
@@ -98,7 +126,7 @@ export default function PostState(props) {
     }
 
   return (
-      <postContext.Provider value={{posts,addPost , deletePost , editPost, getPosts, getAllPosts}}>
+      <postContext.Provider value={{posts,addPost , deletePost , editPost, getPosts, getAllPosts, search, setposts, Search, setSearch}}>
           {props.children}
       </postContext.Provider>
   )

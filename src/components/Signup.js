@@ -44,7 +44,7 @@ export default function Signup() {
 					<input type="name" name="name" className="form-control" onChange={onChange}/>
 				</div>
 				{
-					Error.errors && Error.errors.some(error => error.msg === "password") &&  <p className="error-message">Name must be alteast 3 characters</p>
+					Error.errors && Error.errors.some(error => error.msg === "name") &&  <p className="error-message">Name must be alteast 3 characters</p>
 				}
 				<div className="form-group formfont">
 					<label htmlFor="email">Email</label>

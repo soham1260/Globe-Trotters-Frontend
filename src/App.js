@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 import Compose from './components/Compose';
 import Update from './components/Update';
 import NotFound from './components/NotFound';
-
+import Search from './components/Search';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
       <PostState>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/search' element={<><Navbar/><Search/><Footer/></>}/>
           <Route path='/about' element={<><Navbar/><About/><Footer/></>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
