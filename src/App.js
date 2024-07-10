@@ -6,7 +6,7 @@ import Signup from './components/Signup';
 import About from './components/About';
 import Post from './components/Post';
 import Myposts from './components/Myposts';
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Compose from './components/Compose';
