@@ -10,12 +10,8 @@ export default function PostState(props) {
     const [Search, setSearch] = useState(false);
 
     const navigate = useNavigate();
-
-<<<<<<< HEAD
-    const url="http://localhost:5000";//"https://backend-oup3.onrender.com";//
-=======
+    
     const url="https://backend-oup3.onrender.com";
->>>>>>> a07f06ed2e83b6d50555ca8fec3b1ccac03bfd57
     const getPosts = async () => {
       try {
         const response = await fetch(`${url}/fetchposts`, {
