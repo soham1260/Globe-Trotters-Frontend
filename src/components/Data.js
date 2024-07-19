@@ -10,13 +10,9 @@ export default function Data() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
       getAllPosts().then(() => {
         setLoading(false);
       });
-    } else {
-      navigate("/signup");
-    }
   }, []);
   const startingContent =
     "Globe Trotters, a travel blog for those who love to explore the world and its wonders. Whether you’re looking for inspiration, tips, or stories, you’ll find them here. We as a community share our adventures and experiences from different countries and cultures. We’ll show you the best places to visit, the most amazing things to do, and the most delicious food to eat. We’ll also give you honest and helpful advice on how to travel smarter, cheaper, and better. Globe Trotters is more than just a travel blog. It’s a community of passionate travellers who want to make the most of their journeys and live their dreams 😊";
@@ -53,7 +49,7 @@ export default function Data() {
         posts.map((post) => {
           return (
             <div key={post._id}>
-              <h1>{post.title}</h1>
+              <h2>{post.title}</h2>
               <p style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
                 {stripHtmlTags(post.content).substring(0, 150)}
                 {(post.content.length > 150 || post.images || post.video) && (

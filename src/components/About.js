@@ -13,7 +13,8 @@ export default function About() {
     <div className='container' style={{ paddingTop: "5%", paddingBottom: "5%" }}>
       <h1>About</h1>
       <p style={{paddingTop: "0px", margin: "0px"}}>From an explorer, for the explorers. Hi, I am Soham, the creator of this awesome website.</p>
-      <p style={{paddingTop: "10px", margin: "0px"}}><a href="https://github.com/soham1260/Globe-Trotters">Here's the source code!</a></p>
+      <p style={{paddingTop: "10px", margin: "0px"}}>Here's the source code!</p>
+      <p style={{paddingTop: "10px", margin: "0px"}}><a href="https://github.com/soham1260/Globe-Trotters-Frontend">Frontend</a> | <a href="https://github.com/soham1260/Globe-Trotters-Backend">Backend</a></p>
       <p style={{paddingTop: "10px", margin: "0px"}}>The major components that helped me build this awesome website,</p>
       <div className="row" style={{width : '100%', paddingBottom: "3%"}}>
 

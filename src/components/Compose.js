@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback,useEffect } from "react";
 import { postContext } from "./state/PostState";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
@@ -11,7 +11,7 @@ import "react-quill/dist/quill.snow.css"; // import the styles
 export default function Compose() {
   const navigate = useNavigate();
   const context = useContext(postContext);
-  const { addPost } = context;
+  const { addPost,Loggedin } = context;
 
   const [Post, setPost] = useState({ title: "", content: "" });
 
@@ -24,6 +24,13 @@ export default function Compose() {
   const [Video,setVideo] = useState();
 
   const [Videourl,setVideourl] = useState("");
+
+  useEffect(() => {
+    if(!Loggedin)
+    {
+      navigate("/");
+    }
+  });
 
   const handleClick = async (e) => {
     e.preventDefault();

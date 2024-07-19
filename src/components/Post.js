@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player';
 export default function Post() {
   let navigate = useNavigate();
   const context = useContext(postContext);
-  const { deletePost } = context;
+  const { deletePost,Loggedin } = context;
   const [Loading, setLoading] = useState(true);
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -23,7 +23,7 @@ export default function Post() {
       });
 
       if (!response.ok) {
-        throw new Error('Token is invalid or request failed');
+        throw new Error('Request failed');
       }
 
       const postData = await response.json();
@@ -41,9 +41,12 @@ export default function Post() {
     getPost();
   }, [id]);
 
-  const token = localStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-  const userId = decodedToken.user.id;
+  if(Loggedin)  
+  {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwtDecode(token);
+    var userId = decodedToken.user.id;
+  }
 
   console.log('Post state:', post);
   console.log('Loading state:', Loading);
@@ -79,7 +82,7 @@ export default function Post() {
             <div style={{ fontFamily: "Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode, Geneva, Verdana, sans-serif", fontSize: "18px", marginTop: "20px" }}>
               <i>~ {post.name} <br /> <small>{new Date(post.date).toLocaleString()}</small></i>
             </div>
-            {userId === post.user && (
+            {Loggedin && userId === post.user && (
               <div className='row' style={{ marginTop: "1%" }}>
                 <button className="btn btn-class col-md-1" style={{ marginLeft: "1%", marginRight: "2%" }} type="submit" name="button" onClick={() => { navigate(`/updatepost/${post._id}`) }}>Edit</button>
                 <button className="btn btn-class col-md-1" type="submit" name="button" onClick={() => { deletePost(post._id); navigate("/"); }}>Delete</button>

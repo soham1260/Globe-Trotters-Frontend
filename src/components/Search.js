@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import spinner from "../assets/spinner.gif";
 import notfound from "../assets/notfound.png";
 import { postContext } from "./state/PostState";
@@ -13,13 +13,9 @@ export default function Search() {
     const context = useContext(postContext);
     const { posts, search, setposts, Search, setSearch } = context;
 
-    let navigate = useNavigate();
     useEffect(() => {
         setposts([]);
         setSearch(false);
-        if (!localStorage.getItem("token")) {
-          navigate("/signup");
-        }
       },[]);
 
       function stripHtmlTags(str) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { createContext,useState } from "react";
+import { createContext,useState,useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 export const postContext = createContext();
 
@@ -8,10 +8,31 @@ export default function PostState(props) {
 
     const [posts, setposts] = useState(postsInitial);
     const [Search, setSearch] = useState(false);
-
+    const [Loggedin, setLoggedin] = useState(false);
     const navigate = useNavigate();
     
     const url="https://backend-oup3.onrender.com";
+
+    const checkUser = async () => {
+      try {
+        const response = await fetch(`${url}/isloggedin`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': localStorage.getItem('token')
+          }
+        });
+    
+        if (!response.ok) {
+          setLoggedin(false);
+          throw new Error('Token is invalid or request failed');
+        }
+        setLoggedin(true);
+      } catch (error) {
+        setLoggedin(false);
+      }
+    };
+
     const getPosts = async () => {
       try {
         const response = await fetch(`${url}/fetchposts`, {
@@ -30,7 +51,7 @@ export default function PostState(props) {
         setposts(json);
       } catch (error) {
         console.error(error);
-        navigate("/signup");
+        navigate("/");
       }
     };
     
@@ -54,7 +75,7 @@ export default function PostState(props) {
         setposts(json);
       } catch (error) {
         console.error(error);
-        navigate("/signup");
+        navigate("/");
       }
     };
 
@@ -122,7 +143,7 @@ export default function PostState(props) {
     }
 
   return (
-      <postContext.Provider value={{posts,addPost , deletePost , editPost, getPosts, getAllPosts, search, setposts, Search, setSearch}}>
+      <postContext.Provider value={{posts,addPost , deletePost , editPost, getPosts, getAllPosts, search, setposts, Search, setSearch, Loggedin, setLoggedin, checkUser}}>
           {props.children}
       </postContext.Provider>
   )

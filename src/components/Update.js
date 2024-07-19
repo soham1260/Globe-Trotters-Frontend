@@ -41,9 +41,12 @@ export default function Update() {
             }
           }
           setLoading(false);
+        })
+        .catch(() => {
+          navigate("/");
         });
     } else {
-      navigate("/signup");
+      navigate("/");
     }
   },[]);
 

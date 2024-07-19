@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import login from '../assets/login.jpg'
 import './login.css'
 export default function Login() {
@@ -51,6 +52,9 @@ export default function Login() {
 				{
 					Error && <p className="error-message">Invalid Email or Password</p>
 				}
+				<div className="form-group">
+					New Explorer, <Link to="/signup" >Join Us</Link>
+				</div>
 				<button className="btn btn-class">Explore</button>
 				</form>
 			</div>
