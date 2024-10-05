@@ -302,6 +302,7 @@ export default function Update() {
           type="submit"
           name="button"
           onClick={handleClick}
+          style={{marginTop: "10px"}}
         >
           Update
         </button>

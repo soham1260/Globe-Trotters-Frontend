@@ -3,7 +3,6 @@ import { postContext } from "./state/PostState";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { useDropzone } from "react-dropzone";
-import request from "superagent";
 import spinner from "../assets/spinner.gif";
 import ReactPlayer from 'react-player';
 import "react-quill/dist/quill.snow.css"; // import the styles
@@ -131,7 +130,7 @@ export default function Compose() {
       style={{ paddingTop: "5%", paddingBottom: "5%" }}
     >
       {Loading ? (
-        <div style={{ display: "flex", justifyContent: "center",alignItems:"center",height:"100vh" }}>
+        <div style={{ display: "flex", justifyContent: "center",alignItems:"center",height:"66vh" }}>
           <img src={spinner} alt="loading..." width="100px" />
         </div>
       ) : (

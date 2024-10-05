@@ -26,23 +26,20 @@ export default function Search() {
         return str;
       }
 
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
         if(!Input) {
             setError(true);
         }
         else{
             setError(false);
-            search(Input);
+            await search(Input);
         }
+        setLoading(false);
       }
   return (
     <div className="container" style={{ paddingTop: "5%", paddingBottom: "5%" }}>
-      {Loading ? (
-        <div style={{ display: "flex", justifyContent: "center",alignItems:"center",height:"100vh" }}>
-          <img src={spinner} alt="loading..." width="100px" />
-        </div>
-      ) : (
         <>
             <h1>Search</h1>
             <form>
@@ -66,9 +63,13 @@ export default function Search() {
               </div>
             )
           })}
-          { Search && <div style={{display:"flex",justifyContent:"center",marginTop:"5%"}}><img src={notfound} width={"40%"}/></div>}
+          {Loading && !Search && 
+            <div style={{ display: "flex", justifyContent: "center",alignItems:"center",height:"40vh" }}>
+              <img src={spinner} alt="loading..." width="100px" />
+            </div>}
+
+          {!Loading && Search && <div style={{display:"flex",justifyContent:"center",marginTop:"5%"}}><img src={notfound} width={"40%"}/></div>}
         </>
-      )}
     </div>
   )
 }
