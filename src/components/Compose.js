@@ -1,10 +1,11 @@
-import React, { useContext, useState, useCallback,useEffect } from "react";
+import React, { useContext, useState, useCallback, useEffect, useRef } from "react";
 import { postContext } from "./state/PostState";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { useDropzone } from "react-dropzone";
 import spinner from "../assets/spinner.gif";
 import ReactPlayer from 'react-player';
+import { marked } from "marked";
 import "react-quill/dist/quill.snow.css"; // import the styles
 
 export default function Compose() {
@@ -24,12 +25,26 @@ export default function Compose() {
 
   const [Videourl,setVideourl] = useState("");
 
+  const [Prompt,setPrompt] = useState("");
+
+  const [Response,setResponse] = useState("");
+
+  const timeouts = useRef([]);
+
+  const [Generating,setGenerating] = useState(false);
+
+  const GeneratingRef = useRef(false);
+
   useEffect(() => {
     if(!Loggedin)
     {
       navigate("/");
     }
   });
+
+  useEffect(() => {
+    GeneratingRef.current = Generating;
+  }, [Generating]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -124,6 +139,46 @@ export default function Compose() {
     justifyContent: "center",
     flexDirection: "column",
   };
+
+  const onPromptChange = (e) => {
+    setPrompt(e.target.value)
+  };
+
+  const handlePrompt = async() => {
+    setResponse("");
+    setGenerating(true);
+    fetch("https://backend-oup3.onrender.com/ai",{
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        prompt: Prompt
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (!GeneratingRef.current) {
+        // If stopped before response arrived, do nothing here
+        return;
+      }
+      timeouts.current.forEach(clearTimeout);
+      timeouts.current = [];
+      const fullText = marked(data.response ? data.response : "Please Enter the message!");
+      for (let i = 0; i < fullText.length; i++) {
+        const timeout = setTimeout(() => {
+          setResponse(prev => prev + fullText.charAt(i));
+        }, i * 10);
+        timeouts.current.push(timeout);
+      }
+      const finalTimeout = setTimeout(() => {
+        setGenerating(false);
+      }, fullText.length * 10);
+      timeouts.current.push(finalTimeout);
+    });
+  }
+
   return (
     <div
       className="container"
@@ -157,6 +212,77 @@ export default function Compose() {
                 <p className="error-message">Please Enter content</p>
               )}
             </div>
+
+            <button
+              className="btn btn-class"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              type="button"
+              style={{ marginBottom: "15px" }}
+            >
+              Ask AI
+            </button>
+
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+            >
+              <div className="modal-dialog" role="document" style={{width:"850px", maxWidth:"90%"}}>
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 className="modal-title" id="exampleModalLabel">
+                      Need help composing a blog? Ask right away!
+                    </h4>
+                  </div>
+                  <div className="modal-body" style={{paddingBottom:"5px"}}>
+                    <textarea
+                      placeholder="Describe a beautiful day!"
+                      className="form-control"
+                      style={{height:"30px",maxWidth:"100%"}}
+                      type="text"
+                      name="prompt"
+                      value={Prompt}
+                      onChange={onPromptChange}
+                    />
+                  <div dangerouslySetInnerHTML={{ __html: Response }} style={{marginTop:"15px"}}/>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-class" onClick={() => {setPost({ ...Post, content: Post.content+Response });}}>
+                      Append to content
+                    </button>
+                    <button type="button" className="btn btn-class" onClick={() => {setPost({ ...Post, content: Response });}}>
+                      Overwrite on content
+                    </button>
+                    <button type="button" className="btn btn-class" onClick={() => navigator.clipboard.writeText(Response)}>
+                      Copy
+                    </button>
+                    {Generating ? (<button
+                      type="button"
+                      className="btn rbtn-class"
+                      // data-dismiss="modal"
+                      onClick={() => {timeouts.current.forEach(clearTimeout);timeouts.current = [];setGenerating(false);}}
+                    >
+                      Stop
+                    </button>) :
+                    (<button type="button" className="btn btn-class" onClick={handlePrompt}>
+                      Ask
+                    </button>)}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div>
               <div style={input} {...getRootProps()}>
                 <input {...getInputProps()} />

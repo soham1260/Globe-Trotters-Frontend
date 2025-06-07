@@ -7,12 +7,13 @@ import mongo from '../assets/mongo.png';
 import express from '../assets/express.png';
 import react from '../assets/react.png';
 import cloudinary from '../assets/Cloudinary_Logo.png'
+import ai from '../assets/ai.png'
 
 export default function About() { 
   return (
     <div className='container' style={{ paddingTop: "5%", paddingBottom: "5%" }}>
       <h1>About</h1>
-      <p style={{paddingTop: "0px", margin: "0px"}}>From an explorer, for the explorers. Hi, I am Soham, the creator of this awesome website.</p>
+      <p style={{paddingTop: "0px", margin: "0px"}}>From an explorer, for the explorers. Hi, I am Soham, the creator of this awesome website. <a href="https://soham-khatavkar.onrender.com/">Know more about me!</a></p>
       <p style={{paddingTop: "10px", margin: "0px"}}>Here's the source code!</p>
       <p style={{paddingTop: "10px", margin: "0px"}}><a href="https://github.com/soham1260/Globe-Trotters-Frontend">Frontend</a> | <a href="https://github.com/soham1260/Globe-Trotters-Backend">Backend</a></p>
       <p style={{paddingTop: "10px", margin: "0px"}}>The major components that helped me build this awesome website,</p>
@@ -70,6 +71,13 @@ export default function About() {
         <div style={{height: "120px", display: "flex", alignItems: "center"}}>
           <div class="col-md-2"><img src={cloudinary} alt="html" width="150px"/></div>
           <div class="col-md-10">Cloudinary is a cloud-based service that provides a comprehensive solution for managing, optimizing, and delivering images and videos for web and mobile applications.</div>
+        </div>
+
+        <hr style={{ width: "100%", height: "2px", backgroundColor: "#1abc9c", margin: "0px" , border: "0px" }} />
+        
+        <div style={{height: "120px", display: "flex", alignItems: "center"}}>
+          <div className="col-md-10">Gemini AI is Google's advanced AI model, designed to serve as a personal assistant and enhance productivity. It is characterized by its ability to reason through its responses, particularly in complicated tasks such as data visualization, and generating creative content. Gemini AI is embedded in Globe Trotters to enhance your experience and help you discover the world more effectively.</div>
+          <div className="col-md-2" style={{display:"flex",justifyContent:"center"}}><img src={ai} alt="html" width="100px"/></div>
         </div>
 
       </div>
