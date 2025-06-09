@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import {useNavigate,Link} from 'react-router-dom'
 import demo from '../assets/demo.jpg'
+import google from '../assets/google.png'
+
 export default function Signup() {
 	const [Credentials, setCredentials] = useState({name : "", email : "", password : ""});
 	const [Error, setError] = useState({ errors: [] });
@@ -66,6 +68,7 @@ export default function Signup() {
 				<div className="form-group">
 					Already a traveller, <Link to="/login" >click here</Link> to explore
 				</div>
+				<button className="btn btn-class" style={{marginRight:"10px"}} onClick={(e) => {e.preventDefault(); window.location.href = "https://backend-oup3.onrender.com/auth/google";}}><img src={google} style={{width:"20px",marginRight:"5px"}}/>Google</button>
 				<button className="btn btn-class">Explore</button>
 				</form>
 			</div>

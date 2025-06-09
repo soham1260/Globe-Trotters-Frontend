@@ -13,6 +13,7 @@ import Compose from './components/Compose';
 import Update from './components/Update';
 import NotFound from './components/NotFound';
 import Search from './components/Search';
+import OAuthSuccess from "./components/OAuthSuccess";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <PostState>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path="/oauth-success" element={<OAuthSuccess/>} />
           <Route path='/search' element={<><Navbar/><Search/><Footer/></>}/>
           <Route path='/about' element={<><Navbar/><About/><Footer/></>}/>
           <Route path='/login' element={<Login/>}/>

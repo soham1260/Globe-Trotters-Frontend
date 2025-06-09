@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import login from '../assets/login.jpg'
 import './login.css'
+import google from '../assets/google.png'
+
 export default function Login() {
 
 	const [Credentials, setCredentials] = useState({email : "",password : ""});
@@ -55,6 +57,7 @@ export default function Login() {
 				<div className="form-group">
 					New Explorer, <Link to="/signup" >Join Us</Link>
 				</div>
+				<button className="btn btn-class" style={{marginRight:"10px"}} onClick={(e) => {e.preventDefault(); window.location.href = "https://backend-oup3.onrender.com/auth/google";}}><img src={google} style={{width:"20px",marginRight:"5px"}}/>Google</button>
 				<button className="btn btn-class">Explore</button>
 				</form>
 			</div>
